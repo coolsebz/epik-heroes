@@ -12,7 +12,7 @@ var _ = require('lodash'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   Area = mongoose.model('Area'),
-  DistressSignal = mongoose.model('DistressSignal'),
+  HelpRequest = mongoose.model('HelpRequest'),
 
   validator = require('validator');
 
@@ -33,7 +33,7 @@ exports.create = function (req, res) {
    Area.findById(req.body.area).exec(function(err, area) {
 
     console.log(area);
-    var signal = new DistressSignal(req.body);
+    var signal = new HelpRequest(req.body);
 
     signal.user = req.user;
     signal.area = area;
@@ -56,26 +56,26 @@ exports.create = function (req, res) {
 /**
  * Update profile picture
  */
-exports.getAlerts = function (req, res) {
-  // get an area
-  console.log(req.query);
+// exports.getAlerts = function (req, res) {
+//   // get an area
+//   console.log(req.query);
 
-  var geoJsonPoint = { type: 'Point', coordinates: [parseFloat(req.query.lat), parseFloat(req.query.long)] }
-  Area.find({ polygonContour: { $geoIntersects: { $geometry: geoJsonPoint }}}, function(err, area) {
+//   var geoJsonPoint = { type: 'Point', coordinates: [parseFloat(req.query.lat), parseFloat(req.query.long)] }
+//   Area.find({ polygonContour: { $geoIntersects: { $geometry: geoJsonPoint }}}, function(err, area) {
 
-    if(area.length === 0) {
-      return res.json({ isAlert: false, area: '' });
-    }
+//     if(area.length === 0) {
+//       return res.json({ isAlert: false, area: '' });
+//     }
 
-    DistressSignal.count({ area: area[0]._id }).exec(function(err, noOfDistressSignals) {
+//     DistressSignal.count({ area: area[0]._id }).exec(function(err, noOfDistressSignals) {
 
-      //todo(seb): extract the duplicate code out
-      if(noOfDistressSignals > signalThreshold) { 
-        return res.json({ isAlert: true, area: area[0]._id });
-      } else {
-        return res.json({ isAlert: false, area: area[0]._id });
-      }
-    })
-  });
+//       //todo(seb): extract the duplicate code out
+//       if(noOfDistressSignals > signalThreshold) { 
+//         return res.json({ isAlert: true, area: area[0]._id });
+//       } else {
+//         return res.json({ isAlert: false, area: area[0]._id });
+//       }
+//     })
+//   });
 
-};
+// };

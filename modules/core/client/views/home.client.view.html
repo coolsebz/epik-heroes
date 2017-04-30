@@ -1,14 +1,23 @@
-<section>
+<section class="background" ng-class="{ 'red': (vm.isAlert === true) }">
 
 <div class="device">
-  <div class="widget">
-    <div class="triangle-up">
+    <!-- <div class="triangle-up">
       <div class="indent" ng-click="vm.triggerAlert()">
       </div>
     </div>
-    <div class="trapezoid">
+    <div class="trapezoid" ng-click="vm.requestHelp()">
+    </div> -->
+
+    <div class="contour">
+      <div class="up-btn" ng-click="vm.action()">
+      </div>
+
+      <div class="down-btn" ng-click="vm.action()">
+      </div>
     </div>
-  </div>
 </div>
+
+
+
 
 </section>
