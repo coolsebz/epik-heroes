@@ -74,7 +74,7 @@
           "coordinates": [vm.currentLocation.latitude, vm.currentLocation.longitude]
         },
         "area": vm.currentArea
-      }, function(response) {
+      }).then( function(response) {
 
         navigator.vibrate([1000,      500,    1000]);
 
@@ -91,8 +91,9 @@
           "coordinates": [vm.currentLocation.latitude, vm.currentLocation.longitude]
         },
         "area": vm.currentArea
-      }, function(response) {
+      }).then( function(response) {
 
+        vm.isRescue = true;
         navigator.vibrate([1000,      500,    1000]);
 
       });

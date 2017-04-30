@@ -1,4 +1,4 @@
-<section class="background" ng-class="{ 'red': (vm.isAlert === true) }">
+<section class="background" ng-class="{ 'red': (vm.isAlert && !vm.isRescue), 'white': (vm.isRescue && vm.isAlert) }">
 
 <div class="device">
     <!-- <div class="triangle-up">
@@ -9,10 +9,10 @@
     </div> -->
 
     <div class="contour">
-      <div class="up-btn" ng-click="vm.action()">
+      <div class="up-btn" ng-click="vm.triggerAlert()">
       </div>
 
-      <div class="down-btn" ng-click="vm.action()">
+      <div class="down-btn" ng-click="vm.requestHelp()">
       </div>
     </div>
 </div>
